@@ -56,7 +56,7 @@ print("bool -> int: ", int(False), type(int(False)))
 print("bool -> int: ", int(True), type(int(True)))
 
 # 运算符 + - * /(除) //(取模) %(取余) **(幂)
-print(1 + 1, "2")
+assert 1 + 1 == 2
 print(2 - 1, "1")
 print(3 * 5, "15")
 print(4 / 3, "1.3333333333333333")
@@ -165,4 +165,3 @@ print(list(li), "[1, 3, 5, 7, 9]")
 # 进行迭代
 for _ in li:
     print(_)
-
