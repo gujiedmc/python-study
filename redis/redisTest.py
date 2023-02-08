@@ -6,7 +6,7 @@ if __name__=="__main__":
     #host = '127.0.0.1'为服务器IP, port = 6379为端口号, password = 'topsky'为密码,
     # decode_responses = True，db=3为数据库
     # sr = StrictRedis(host = 'bit.local', port = 6379, password = '',decode_responses = True)
-    r = redis.Redis(host="bit.local", port=6379, password="")
+    r = redis.Redis(host="127.0.0.1", port=6379, password="")
 
     #
     index = 0
