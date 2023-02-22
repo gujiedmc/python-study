@@ -1,5 +1,5 @@
-from pyecharts.charts import Bar
 from pyecharts import options as opts
+from pyecharts.charts import Bar
 
 # V1 版本开始支持链式调用
 # 你所看到的格式其实是 `black` 格式化以后的效果

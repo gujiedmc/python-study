@@ -74,7 +74,8 @@ li.extend([5, 6])
 print(li, "=> [1, 2, 3, 4, 5, 6]")
 # 5. 删除 remove, pop,
 print()
-print("list remove", "从列表中移除一个元素，如果有重复元素只移第一个元素", "不存在的会报错 ValueError: list.remove(x): x not in list")
+print("list remove", "从列表中移除一个元素，如果有重复元素只移第一个元素",
+      "不存在的会报错 ValueError: list.remove(x): x not in list")
 li = [1, 2, 3]
 print(li)
 li.remove(3)
@@ -88,7 +89,8 @@ li.remove(1)
 print(li, "=> [1, 1]")
 
 print()
-print("list pop", "弹出指定index的元素", "如果指定的索引位置不存在，将抛出异常", "如果不指定参数，将删除列表中的最后一个元素")
+print("list pop", "弹出指定index的元素", "如果指定的索引位置不存在，将抛出异常",
+      "如果不指定参数，将删除列表中的最后一个元素")
 
 li = [1, 2, 3]
 print(li)
@@ -129,6 +131,5 @@ print(li, "=>", "[1, 2, 3, 4, 5]")
 # 倒序
 li.sort(reverse=True)
 print(li, "=>", "[5, 4, 3, 2, 1]")
-
 
 print("---------------------------list 包方法-----------------------------")

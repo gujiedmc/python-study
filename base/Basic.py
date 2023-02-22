@@ -136,15 +136,14 @@ n = None
 print(type(n), bool(n))
 s = ''
 print(type(s), bool(s))
-li=[]
+li = []
 print(type(li), bool(li))
-e=()
+e = ()
 print(type(e), bool(e))
-d=dict({})
+d = dict({})
 print(type(d), bool(d))
-ss=set()
+ss = set()
 print(type(ss), bool(ss))
-
 
 print("-------------------------------range()--------------------------------------")
 # range 返回的是一个迭代器, 并不是一个真正的列表, 因此只占用 start, stop, step三个数的内存空间
@@ -165,4 +164,3 @@ print(list(li), "[1, 3, 5, 7, 9]")
 # 进行迭代
 for _ in li:
     print(_)
-
