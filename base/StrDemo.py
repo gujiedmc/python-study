@@ -8,7 +8,6 @@ c = """
     换行
     """
 
-
 # -------------------------基本方法-----------------------------
 
 # 类型强转
@@ -16,11 +15,6 @@ str = str(1)
 # 获取长度
 assert len('abc') == 3
 assert len('中文') == 2
-
-
-
-
-
 
 # --------------------------编码------------------------------
 """
@@ -41,11 +35,6 @@ assert '中文' == '\u4e2d\u6587'
 # 字符串和字节数组转换
 assert '中文'.encode('utf-8') == b'\xe4\xb8\xad\xe6\x96\x87'
 assert b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8') == '中文'
-
-
-
-
-
 
 # --------------------------格式化------------------------------
 """
@@ -71,11 +60,14 @@ assert '{name}:{age}'.format(**_site) == 'zhang:3'
 _list = ['zhang', 3]
 _list2 = ['li', 4]
 assert '{0[0]}:{0[1]},{1[0]}:{1[1]}'.format(_list, _list2) == 'zhang:3,li:4'
+
+
 # 通过对象
 class User(object):
     def __init__(self, name, age):
         self.name = name
         self.age = age
+
 
 user1 = User('zhang', 3)
 user2 = User('li', 4)

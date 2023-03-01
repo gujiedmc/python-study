@@ -1,5 +1,4 @@
-import json
-str="""
+str = """
 {
     "code": 0,
     "result":

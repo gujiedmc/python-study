@@ -22,6 +22,6 @@ g = (
         legend_opts=opts.LegendOpts(is_show=False),
         title_opts=opts.TitleOpts(title="微博转发关系图"),
     )
-#     .render("微博转发关系图.html")
+    #     .render("微博转发关系图.html")
 )
 g.render()
