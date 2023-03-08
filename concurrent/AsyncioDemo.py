@@ -174,6 +174,29 @@ async def test_delay_new():
     else:
         raise AssertionError('catch TimeoutError fail')
 
+async def test_simple_wait():
+    """
+    简单等待, asyncio.wait()
+    return_when 可以设置什么时候返回,
+    返回的是完成的task列表,和未完成的task列表
+    """
+    ls = [asyncio.create_task(just_asyncio(1)), just_asyncio(2)]
+    done, pending = await asyncio.wait(ls, timeout=3, return_when=asyncio.tasks.ALL_COMPLETED)
+    print(done)
+    print(pending)
+
+async def test_task_result_to_gnerator():
+    """
+    asyncio.as_completed 将执行一堆task执行, 并返回一个结果的迭代器, 按task完成顺序放入迭代器
+    """
+    ls = [asyncio.create_task(just_asyncio(1)), just_asyncio(2), just_asyncio(3)]
+    li = asyncio.as_completed(ls, timeout=2)
+    assert type(li).__name__ == 'generator'
+    for co in li:
+        earliest_result = await co
+        print('执行结束, 收到结果: ',earliest_result)
+    pass
+
 if __name__ == '__main__':
     # test_just_asyncio()
     # test_run_coroutine()
@@ -183,5 +206,7 @@ if __name__ == '__main__':
     # asyncio.run(test_task_group())
     # asyncio.run(test_gather_multi_task())
     # asyncio.run(test_delay())
-    asyncio.run(test_delay_new())
+    # asyncio.run(test_delay_new())
+    # asyncio.run(test_simple_wait())
+    asyncio.run(test_task_result_to_gnerator())
     pass
