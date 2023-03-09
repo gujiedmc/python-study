@@ -14,6 +14,7 @@
       task，通过 asyncio.create_task将coroutine封装成为一个task， await 一个 task的时候，并不会等待这个task执行
 """
 import asyncio
+import threading
 import time
 
 
@@ -185,7 +186,7 @@ async def test_simple_wait():
     print(done)
     print(pending)
 
-async def test_task_result_to_gnerator():
+async def test_task_result_to_generator():
     """
     asyncio.as_completed 将执行一堆task执行, 并返回一个结果的迭代器, 按task完成顺序放入迭代器
     """
@@ -195,6 +196,56 @@ async def test_task_result_to_gnerator():
     for co in li:
         earliest_result = await co
         print('执行结束, 收到结果: ',earliest_result)
+    pass
+
+async def test_to_thread():
+    """
+    测试将协程放入异步线程执行, 直接通过EventLoop执行coroutine会占用EventLoop的线程， 放入异步线程则不会
+    可以通过将一个cpu密集的协程放入到异步线程中去执行
+    coroutine asyncio.to_thread(func, /, *args, **kwargs)
+    """
+    cor = just_asyncio(1)
+    await asyncio.to_thread(cor)
+    pass
+
+async def test_task_method():
+    """
+    测试asyncio.Task 中的方法
+    :return:
+    """
+    task_completed = asyncio.create_task(just_asyncio(1), name='test0')
+    await task_completed
+
+    tasks =  [asyncio.create_task(just_asyncio(2), name='task1'),
+        asyncio.create_task(just_asyncio(2), name='task2'),]
+    # 当前正在运行的task
+    current_task = asyncio.current_task()
+    print(current_task)
+    # 当前未执行完成的task
+    all_tasks = asyncio.all_tasks()
+    print(all_tasks)
+    assert len(all_tasks) == 3
+
+    # 返回线程是否已经完成
+    assert current_task.done() == False
+    # 获取task的返回结果， 如果已完成则返回结果，如果出现异常则返回异常，如果被取消则返回CancelledError
+    assert task_completed.result() == 1
+
+    # 添加回调, 如果要移除callback 使用 remove_done_callback
+    tasks[0].add_done_callback(lambda x: print(f'task1执行结束: 收到回调结果{x.result()}'))
+    # 返回堆栈和打印对战
+    tasks[0].get_stack()
+    tasks[0].print_stack()
+    # 获取和设置name
+    tasks[0].get_name()
+    tasks[0].set_name('task1-new')
+    # 取消task
+    tasks[0].cancel()
+    # 返回是否已取消, 取消中
+    tasks[0].cancelled()
+    tasks[0].cancelling()
+
+    await asyncio.gather(*tasks)
     pass
 
 if __name__ == '__main__':
@@ -208,5 +259,6 @@ if __name__ == '__main__':
     # asyncio.run(test_delay())
     # asyncio.run(test_delay_new())
     # asyncio.run(test_simple_wait())
-    asyncio.run(test_task_result_to_gnerator())
+    # asyncio.run(test_task_result_to_generator())
+    asyncio.run(test_task_method())
     pass
