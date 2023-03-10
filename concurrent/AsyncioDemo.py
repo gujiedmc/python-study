@@ -257,8 +257,8 @@ if __name__ == '__main__':
     # asyncio.run(test_task_group())
     # asyncio.run(test_gather_multi_task())
     # asyncio.run(test_delay())
-    # asyncio.run(test_delay_new())
+    asyncio.run(test_delay_new())
     # asyncio.run(test_simple_wait())
     # asyncio.run(test_task_result_to_generator())
-    asyncio.run(test_task_method())
+    # asyncio.run(test_task_method())
     pass
