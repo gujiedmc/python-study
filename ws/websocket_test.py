@@ -27,6 +27,7 @@ async def client_start():
     async with websockets.connect("ws://localhost:8765") as websocket:
         asyncio.create_task(client_read(websocket))
         asyncio.create_task(client_ping(websocket))
+        await asyncio.Future()
 
 def run_loop_inside_thread(loop):
     loop.run_forever()
@@ -42,5 +43,5 @@ if __name__ == '__main__':
     asyncio.set_event_loop(loop)
     loop.create_task(sever_start())
     time.sleep(1)
-    # loop.create_task(client_start())
+    loop.create_task(client_start())
     loop.run_forever()
